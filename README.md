@@ -30,41 +30,99 @@
 # 사용 라이브러리
 
 ## react-hook-form
-```shll
-<input
-   type="text"
-   {...register("등록될 아이디", {
-   required: "아이디(이메일)을 입력하세요",
-   minLength: {
-     value: 9,
-     message: "올바른 이메일 주소를 입력하세요.",
-   },
-   maxLength: {
-     value: 50,
-     message: "올바른 이메일 주소를 입력하세요.",
-   },
-   pattern: {
-      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-      message: "올바른 이메일 주소를 입력하세요.",
-   },
-   autoComplete="off"
-   placeholder="이메일을 입력해 주세요."
- />
+
+
+```shell
+import React from 'react';
+import { useForm } from 'react-hook-form';
+
+function MyForm() {
+  const { register, handleSubmit, errors } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label>
+        Name:
+        <input
+          type="text"
+          name="name"
+          ref={register({
+            required: 'Name is required',
+            minLength: { value: 2, message: 'Minimum length is 2 characters' },
+            maxLength: { value: 30, message: 'Maximum length is 30 characters' },
+            pattern: { value: /^[A-Za-z]+$/, message: 'Only letters are allowed' },
+          })}
+        />
+        {errors.name && <p>{errors.name.message}</p>}
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default MyForm;
+
 ```
+
+
+```shll
+
+const { setValue, getValues, handleSubmit, errors } = useForm();
+
+const onSubmit = (data) => {
+  console.log(data);
+};
+
+
+<form onSubmit={handleSubmit(onSubmit)}>
+  <input
+     type="text"
+     {...register("등록될 아이디", {
+     required: "아이디(이메일)을 입력하세요",
+     minLength: {
+       value: 9,
+       message: "올바른 이메일 주소를 입력하세요.",
+     },
+     maxLength: {
+       value: 50,
+       message: "올바른 이메일 주소를 입력하세요.",
+     },
+     pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "올바른 이메일 주소를 입력하세요.",
+     },
+     placeholder="이메일을 입력해 주세요."
+  />
+</form>
+```
+
+### watch
+watch 함수는 특정 입력 필드의 값을 감시(watch)할 때 사용되는 함수입니다. </br>
+이 함수를 사용하면 특정 필드의 값이 변경될 때마다 해당 값을 얻을 수 있습니다. 이는 주로 동적으로 폼의 상태나 특정 로직을 처리할 때 유용합니다.
+
 ### register 
+입력 필드를 React Hook Form에 등록하는 함수입니다. </br>
+이 함수는 입력 필드의 ref 속성에 전달되어야 합니다. 예를 들어, ref={register}와 같이 사용할 수 있습니다.
 
 ### required
+필드가 비어 있을 때 유효성 검사에 실패하도록 하는 속성입니다
 
 ### minLength
+입력 값의 최소 길이를 지정하는 속성입니다. </br>
+예를 들어, { minLength: { value: 5, message: 'Minimum length is 5 characters' } }와 같이 사용할 수 있습니다.
 
 ### maxLength
-
-### placeholder
-
-### autoComplete
+입력 값의 최대 길이를 지정하는 속성입니다. </br>
+예를 들어, { maxLength: { value: 10, message: 'Maximum length is 10 characters' } }와 같이 사용할 수 있습니다.
 
 ### pattern 
-유효성 체크 패턴을 넣어 준다.
+정규 표현식을 사용하여 입력 값의 유효성을 확인하는 속성입니다. </br>
+예를 들어, { pattern: { value: /^[A-Za-z]+$/, message: 'Only letters are allowed' } }와 같이 사용할 수 있습니다.
+
 - 이메일
   - 올바른 이메일 주소를 입력
   -  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
@@ -76,11 +134,18 @@
 - 패스워드 :
   - 8~15자 영문, 숫자, 특수문자
   -  /^(?=.*[a-zA-Z])(?=.*[!@#&$%^*+=-])(?=.*[0-9]).{8,15}$/
-    
+
+### validate 
+사용자 정의 유효성 검사 함수를 정의할 수 있는 속성입니다.  </br>
+입력 값이 주어진 조건을 충족하지 않으면 유효성 검사에 실패합니다. 함수는 유효성 검사를 통과하면 true를 반환하고, 실패하면 오류 메시지를 반환해야 합니다
+
 - 패스워드 확인
   - matchesPreviousPassword를 사용 한다.
   - matchesPreviousPassword 함수는 react-hook-form 라이브러리에서 제공하는 내장 유효성 검사 함수 중 하나이다. 이 함수는 현재 입력 값이 이전에 입력한 다른 필드의 값과 일치하는지 여부를 확인 할 수 있다. 주로 비밀번호 확인과 같이 두 개의 입력 필드 간에 값을 일치시키기 위해 한다.
-  - 현재 value 값을 matchesPreviousPassword의 매개변수로 받아서 현재 value 값과 userPassowrd로 등록되어 있는 input의 value 값이 같지 않으면 "비밀번호가 일치하지 않습니다" 라는 메시지를 화면에 보여 준다.
+
+현재 value 값을 matchesPreviousPassword의 매개변수로 받아서 현재 value 값과 userPassowrd로 등록되어 있는 input의 value 값이 같지 않으면 "비밀번호가 일치하지 않습니다" 라는 메시지를 화면에 보여 준다.
+
+    
 ```shell
   <input
     type="password"
@@ -95,6 +160,41 @@
        autoComplete="off"
    />
 ```
+
+- api 호출하여 해당 Email이 존재 하는지 확인하기
+  
+```shell
+validate: {
+  isAvailable: async value => {
+  const res = await GetDuplicateEmail(value);
+  return (
+      (res && res.data.result) ||
+      '이미 사용중인 이메일입니다. 다른 이메일을 입력하세요'
+    );
+  },
+},
+```
+또는 아래와 같이 사용 할 수 있다.
+
+```shell
+
+const isAvailable = async() => {
+  const res = await GetDuplicateEmail(value);
+  return (
+    (res && res.data.result) ||
+    '이미 사용중인 이메일입니다. 다른 이메일을 입력하세요'
+  );
+}
+
+<input
+ type="text"
+   {...register(`${registerId}`, {
+   validate: isAvailable,
+ })}
+/>
+```
+
+
 ## 에러 메시지 화면 표시
 
 - error이 true일 경우 해당 에러 메시지를 화면에 표시 한다.

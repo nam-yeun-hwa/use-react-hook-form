@@ -149,10 +149,10 @@ watch 함수는 특정 입력 필드의 값을 감시(watch)할 때 사용되는
 사용자 정의 유효성 검사 함수를 정의할 수 있는 속성입니다.  </br>
 입력 값이 주어진 조건을 충족하지 않으면 유효성 검사에 실패합니다. 함수는 유효성 검사를 통과하면 true를 반환하고, 실패하면 오류 메시지를 반환해야 합니다
 
-- #### 패스워드 확인
-  - matchesPreviousPassword를 사용 한다.
-  - matchesPreviousPassword 함수는 react-hook-form 라이브러리에서 제공하는 내장 유효성 검사 함수 중 하나이다. 이 함수는 현재 입력 값이 이전에 입력한 다른 필드의 값과 일치하는지 여부를 확인 할 수 있다. 주로 비밀번호 확인과 같이 두 개의 입력 필드 간에 값을 일치시키기 위해 한다.
-
+#### 패스워드 확인
+matchesPreviousPassword를 사용 한다. </br>
+matchesPreviousPassword 함수는 react-hook-form 라이브러리에서 제공하는 내장 유효성 검사 함수 중 하나이다. 이 함수는 현재 입력 값이 이전에 입력한 다른 필드의 값과 일치하는지 여부를 확인 할 수 있다. 주로 비밀번호 확인과 같이 두 개의 입력 필드 간에 값을 일치시키기 위해 한다.
+</br>
 현재 value 값을 matchesPreviousPassword의 매개변수로 받아서 현재 value 값과 userPassowrd로 등록되어 있는 input의 value 값이 같지 않으면 "비밀번호가 일치하지 않습니다" 라는 메시지를 화면에 보여 준다.
 
     
@@ -171,7 +171,7 @@ watch 함수는 특정 입력 필드의 값을 감시(watch)할 때 사용되는
    />
 ```
 
-- #### api 호출하여 해당 Email이 존재 하는지 확인하기
+#### api 호출하여 해당 Email이 존재 하는지 확인하기
   
 ```shell
 validate: {

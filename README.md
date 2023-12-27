@@ -64,6 +64,9 @@ react-hook-form은 Typescript를 지원하여 정적 타입 검사를 활용할 
 필요한 경우 커스텀 훅이나 로직을 구현하여 react-hook-form을 확장할 수 있습니다.
 </br>
 </br>
+
+## 사용법
+
 사용 예)
 ```shell
 import React from 'react';
@@ -101,6 +104,8 @@ function MyForm() {
 export default MyForm;
 
 ```
+## 속성 및 함수 설명
+
 ### useForm 
 useForm 훅을 사용하여 폼의 상태와 메서드를 가져옵니다. 이를 통해 폼의 전반적인 설정과 제어를 할 수 있습니다.
 

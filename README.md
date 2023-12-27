@@ -27,9 +27,7 @@
 - types
 
   
-# 사용 라이브러리
-
-# react-hook-form
+# 사용 라이브러리 react-hook-form
 
 react-hook-form은 React 기반의 폼 관리를 단순화하고 최적화하기 위한 라이브러리 중 하나입니다. 
 
@@ -104,6 +102,7 @@ export default MyForm;
 
 ```
 </br>
+
 # 속성 및 함수 설명
 
 ### useForm 
@@ -154,7 +153,7 @@ watch 함수는 특정 입력 필드의 값을 감시(watch)할 때 사용되는
 사용자 정의 유효성 검사 함수를 정의할 수 있는 속성입니다.  </br>
 입력 값이 주어진 조건을 충족하지 않으면 유효성 검사에 실패합니다. 함수는 유효성 검사를 통과하면 true를 반환하고, 실패하면 오류 메시지를 반환해야 합니다
 
-#### 패스워드 확인
+### 패스워드 확인
 matchesPreviousPassword를 사용 한다. </br>
 matchesPreviousPassword 함수는 react-hook-form 라이브러리에서 제공하는 내장 유효성 검사 함수 중 하나이다. 이 함수는 현재 입력 값이 이전에 입력한 다른 필드의 값과 일치하는지 여부를 확인 할 수 있다. 주로 비밀번호 확인과 같이 두 개의 입력 필드 간에 값을 일치시키기 위해 한다.
 </br>
@@ -176,7 +175,7 @@ matchesPreviousPassword 함수는 react-hook-form 라이브러리에서 제공�
    />
 ```
 
-#### api 호출하여 해당 Email이 존재 하는지 확인하기
+### api 호출하여 해당 Email이 존재 하는지 확인하기
   
 ```shell
 validate: {
